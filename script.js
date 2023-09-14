@@ -1,3 +1,4 @@
+// Função para redirecionar para outra página
 function redirecionarParaOutraPagina(url) {
     window.location.href = url;
 }
@@ -18,10 +19,13 @@ function realizarPesquisa() {
     });
 }
 
-// Associe a função de pesquisa ao evento de clique do botão
-document.getElementById('botao-pesquisar').addEventListener('click', realizarPesquisa);
-
-
+// Evento de clique no botão de pesquisa
+document.addEventListener('DOMContentLoaded', function() {
+    const botaoPesquisar = document.getElementById('botao-pesquisar');
+    if (botaoPesquisar) {
+        botaoPesquisar.addEventListener('click', realizarPesquisa);
+    }
+});
 
 function atualizarValorBitcoin() {
     fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=brl')
@@ -34,6 +38,12 @@ function atualizarValorBitcoin() {
             console.error('Erro ao buscar preço do Bitcoin:', error);
         });
 }
+
+// Restante do seu código aqui...
+
+// Chama a função para atualizar o valor do Bitcoin inicialmente
+atualizarValorBitcoin();
+
 
 function atualizarValorEthereum() {
     fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=brl')
